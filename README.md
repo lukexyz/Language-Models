@@ -1,8 +1,28 @@
 # NLP Language Models
-Sentiment analysis and generation using ULMFiT (2018) universal language models
+Sentiment analysis and text generation using ULMFiT (2018) Universal Language Model.
 
 # Methodology
-The ULMFiT NLP transfer learning technique, was introduced in this 2018 paper (https://arxiv.org/pdf/1801.06146.pdf)
+The ULMFiT NLP transfer learning technique, (introduced in this 2018 paper https://arxiv.org/pdf/1801.06146.pdf) works in three stages:
+1. **General-Domain LM Pretraining**  
+The `AWD-LSTM SequentialRNN` is pretrained on a general-domain corpus, in our case the `WikiText103` dataset.
+
+2. **Target Task LM Fine-Tuning**  
+The `AWD-LSTM Language Model`, training as a sequence generator, is fine-tuned on the domain-specific corpus (Yelp reviews).
+
+3. **Target Task Classifier**  
+The embeddings learnt from these first two steps are imported into a new `classifier model`, which is fine-tuned on the target task (star ratings) with gradual unfreezing of the final layers.
+
+
+<p align="center" >
+  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/ULMFiT_Artboardx1.5.png?raw=true">
+</p>
+
+
+## Synthetic Text Generation
+
+
+## Classifier Results
+
 
 
 ## Installation on AWS
@@ -23,17 +43,16 @@ The ULMFiT NLP transfer learning technique, was introduced in this 2018 paper (h
     $ python -m ipykernel install --user --name fastai --display-name "fastai v1"
     $ conda install ipywidgets
 
-##### Validate installation
+##### Validate GPU installation
     $ python -m fastai.utils.show_install
 
 ##### Run notebooks
     $ jupyter notebook --ip=0.0.0.0 --no-browser
-    
     # http://<public IP>:8888/?token=<token>
 
 
 ## Improvements
-The 2019 paper [`MultiFiT: Efficient Multi-lingual Language Model Fine-tuning`](https://arxiv.org/abs/1909.04761) expanded on the `ULMFiT` method using  
+The 2019 paper, [`MultiFiT: Efficient Multi-lingual Language Model Fine-tuning`](https://arxiv.org/abs/1909.04761), expands on the `ULMFiT` method using  
 1. `Subword Tokenization`, which uses a mixture of character, subword and word tokens, depending on how common they are. These properties allow it to fit much better to multilingual models (non-english languages).
     
 <p align="center">
@@ -48,6 +67,8 @@ The 2019 paper [`MultiFiT: Efficient Multi-lingual Language Model Fine-tuning`](
 <p align="center" >
   <img src="https://github.com/lukexyz/Language-Models/blob/master/img/multifit_qrnn.png?raw=true" width="500">
 </p>
+
+> _"We find that our monolingual language models fine-tuned only on `100 labeled examples` of the corresponding task in the target language outperform zero-shot inference (trained on `1000 examples` in the source language) with multilingual BERT and LASER. MultiFit also outperforms the other methods when all models are fine-tuned on 1000 target language examples."_
 
 Reference: `Efficient multi-lingual language model fine-tuning` 10 Sep 2019 by Sebastian Ruder and Julian Eisenschlos (http://nlp.fast.ai/classification/2019/09/10/multifit.html) 
 
