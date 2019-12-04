@@ -72,3 +72,5 @@ Reference: `Efficient multi-lingual language model fine-tuning` 10 Sep 2019 by S
     $ jupyter notebook --ip=0.0.0.0 --no-browser
     # http://<public IP>:8888/?token=<token>
 
+### References
+https://humboldt-wi.github.io/blog/research/information_systems_1819/group4_ulmfit
