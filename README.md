@@ -41,9 +41,21 @@ learn.predict("The food is good and the staff", words=430, temperature=0.75)
 > The food is good and the staff is very friendly. We had the full menu and the Big Lots of Vegas. The food was ok, but there was nothing and this isn't a Chinese place.
 
 
-## Classifier Results
+## Classifier: Predicting the Star-value of a Review ★★★★★
+The overall accuracy of the trained classifier was `0.665`, which means that giving the model and un-seen restaurant review it can predict its rating (1-5 stars) correctly `66.5%` of the time.
 
+_Examples:_  
 
+Prediction: 5  | Actual: 5  
+`(INPUT 25816) You can count on excellent quality and fresh baked goods daily. The patisseries are refined and always delicious. I am addicted to their home made salads and strong coffee. \nYou can order customized cakes and impress your guests. Everything here is made with the finest ingredients. It never disappoints. \n\nThe service is formal. You are always treated with respect. Sometimes I don't mind when they call me Madame but I always correct them and ask to be called \"Mademoiselle, SVP!\"\n\nI guarantee you will return here many times.`  
+
+Prediction: 4  | Actual: 3  
+`(INPUT 28342) 8 of us just finished eating here.  Service was very friendly, prices were definitely reasonable, and we all really enjoyed our meals. \n\nI would come back again for sure!\n\nUnfortunately I didn't snap any photos of our food, but here are a few of the place.`  
+
+Prediction: 2  | Actual: 2  
+`(INPUT 43756) The food was not all that.  The customer service was just okay. Don't get what all the rave is about??`
+
+<br/>
 
 ## Recent Improvements 
 In the paper [MultiFiT: Efficient Multi-lingual Language Model Fine-tuning](https://arxiv.org/abs/1909.04761) (2019), the transfer learning language model is improved using  
@@ -52,6 +64,7 @@ In the paper [MultiFiT: Efficient Multi-lingual Language Model Fine-tuning](http
 <p align="center">
   <img src="https://github.com/lukexyz/Language-Models/blob/master/img/multifit_vocabularies.png?raw=true" width="400">
 </p>
+<br/>
 
 2. Updates the `AWD-LSTM` base RNN network with a `Quasi-Recurrent Neural Network` (QRNN). The QRNN benefits from attributes from both a CNN and an LSTM:
 * It can be parallelized across time and minibatch dimensions like a CNN (for performance boost) 
