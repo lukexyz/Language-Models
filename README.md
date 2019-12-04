@@ -1,5 +1,7 @@
 # ULMFiT NLP Transfer Learning :book: :speech_balloon:
-[ULMFiT (2018)](https://arxiv.org/abs/1801.06146) is a state-of-the-art method which provides a framework for NLP transfer learning. 
+`ULMFiT` (2018), is a state-of-the-art method which provides a framework for NLP transfer learning.  
+https://arxiv.org/abs/1801.06146
+
 It works in three stages:  
 
 1. **General-Domain LM Pretraining**  
@@ -22,7 +24,7 @@ The embeddings learnt from these first two steps are imported into a new `classi
 <br/>
 
 ## Synthetic Text Generation
-After `stage 2` of the process is complete, the `AWD-LSTM` RNN language model how now be used for synthetic text generation. The original RNN model was trained to predict the next word in the `WikiText103` dataset, and we have fine-tuned this with our yelp corpus to predict the next word in a restaurant review.
+After stage 2 of the process is complete, the `AWD-LSTM` RNN language model how now be used for synthetic text generation. The original RNN model was trained to predict the next word in the `WikiText103` dataset, we have fine-tuned this with our yelp corpus to predict the next word in a restaurant review.
 
 ```python
 learn.predict("I really loved the restaurant, the food was")
@@ -34,9 +36,9 @@ learn.predict("I hated the restaurant, the food tasted")
 ```
 > I hated the restaurant, the food tasted `bad`
 
-You can generate reviews of any length, however beyond acceptable sentence structure, they tend to lack higher-order cohesion within a paragraph. Larger models such as OpenAI GPT-2 or BERT can do a better job at this, but still suffer from the same problems. 
+You can generate reviews of any length. The output generally has a believable sentence structure, but they tend to lack higher-order coherency within a paragraph. Larger models such as OpenAI GPT-2 or BERT can do a better job at this, but still suffer from the same problems. 
 ```python
-learn.predict("The food is good and the staff", words=430, temperature=0.75)
+learn.predict("The food is good and the staff", words=30, temperature=0.75)
 ```
 > The food is good and the staff is very friendly. We had the full menu and the Big Lots of Vegas. The food was ok, but there was nothing and this isn't a Chinese place.
 
@@ -44,7 +46,7 @@ learn.predict("The food is good and the staff", words=430, temperature=0.75)
 ## Classifier: Predicting the Star-value of a Review ★★★★★
 The overall accuracy of the trained classifier was `0.665`, which means that giving the model and un-seen restaurant review it can predict its rating (1-5 stars) correctly `66.5%` of the time.
 
-_Examples:_  
+_Examples_  
 
 Prediction: 5  | Actual: 5  
 `(INPUT 25816) You can count on excellent quality and fresh baked goods daily. The patisseries are refined and always delicious. I am addicted to their home made salads and strong coffee. \nYou can order customized cakes and impress your guests. Everything here is made with the finest ingredients. It never disappoints. \n\nThe service is formal. You are always treated with respect. Sometimes I don't mind when they call me Madame but I always correct them and ask to be called \"Mademoiselle, SVP!\"\n\nI guarantee you will return here many times.`  
@@ -52,12 +54,18 @@ Prediction: 5  | Actual: 5
 Prediction: 4  | Actual: 3  
 `(INPUT 28342) 8 of us just finished eating here.  Service was very friendly, prices were definitely reasonable, and we all really enjoyed our meals. \n\nI would come back again for sure!\n\nUnfortunately I didn't snap any photos of our food, but here are a few of the place.`  
 
-Prediction: 2  | Actual: 2  
+Prediction: 2  | Actual: 2
 `(INPUT 43756) The food was not all that.  The customer service was just okay. Don't get what all the rave is about??`
 
+## Results
+Plotting an Actual vs. Predicted matrix gives us a visual representation of the accuracy of the model. True positives are highlighted on the diagonal. So even when it makes the prediction wrong - the error usually is only off by only 1 star. 
+<p>
+  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/actual_vs_predicted.png?raw=true" width="300">
+</p>
 <br/>
 
-## Recent Improvements 
+
+## Improvements 
 In the paper [MultiFiT: Efficient Multi-lingual Language Model Fine-tuning](https://arxiv.org/abs/1909.04761) (2019), the transfer learning language model is improved using  
 1. `Subword Tokenization`, which uses a mixture of character, subword and word tokens, depending on how common they are. These properties allow it to fit much better to multilingual models (non-english languages).
     
@@ -106,5 +114,7 @@ Reference: `Efficient multi-lingual language model fine-tuning` 10 Sep 2019 by S
     $ jupyter notebook --ip=0.0.0.0 --no-browser
     # http://<public IP>:8888/?token=<token>
 
-### References
-https://humboldt-wi.github.io/blog/research/information_systems_1819/group4_ulmfit
+##### Acknowledgements
+* [A Code-First Introduction to NLP](https://github.com/fastai/course-nlp)
+* [Universal Language Model Fine-Tuning (ULMFiT)](https://humboldt-wi.github.io/blog/research/information_systems_1819/group4_ulmfit)  
+* [NLP & fastai | MultiFiT](https://mc.ai/nlp-fastai-multifit/)
