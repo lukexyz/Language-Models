@@ -1,5 +1,5 @@
 # ULMFiT NLP Transfer Learning :book: :speech_balloon:
-`ULMFiT` (2018), is a state-of-the-art method which provides a framework for NLP transfer learning.  
+`ULMFiT (2018)`, is a state-of-the-art method which provides a framework for NLP transfer learning.  
 https://arxiv.org/abs/1801.06146
 
 It works in three stages:  
@@ -54,7 +54,7 @@ Prediction: 5  | Actual: 5
 Prediction: 4  | Actual: 3  
 `(INPUT 28342) 8 of us just finished eating here.  Service was very friendly, prices were definitely reasonable, and we all really enjoyed our meals. \n\nI would come back again for sure!\n\nUnfortunately I didn't snap any photos of our food, but here are a few of the place.`  
 
-Prediction: 2  | Actual: 2
+Prediction: 2  | Actual: 2  
 `(INPUT 43756) The food was not all that.  The customer service was just okay. Don't get what all the rave is about??`
 
 ## Results
@@ -85,7 +85,7 @@ In the paper [MultiFiT: Efficient Multi-lingual Language Model Fine-tuning](http
 
 > _"We find that our monolingual language models fine-tuned only on `100 labeled examples` of the corresponding task in the target language outperform zero-shot inference (trained on `1000 examples` in the source language) with multilingual BERT and LASER. MultiFit also outperforms the other methods when all models are fine-tuned on 1000 target language examples."_
 
-Reference: `Efficient multi-lingual language model fine-tuning` 10 Sep 2019 by Sebastian Ruder and Julian Eisenschlos (http://nlp.fast.ai/classification/2019/09/10/multifit.html) 
+Reference: `Efficient multi-lingual language model fine-tuning` by Sebastian Ruder and Julian Eisenschlos (http://nlp.fast.ai/classification/2019/09/10/multifit.html) 
 
 
 
