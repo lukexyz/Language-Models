@@ -24,12 +24,12 @@ The embeddings learnt from these first two steps are imported into a new `classi
 
 
 
-## Improvements
-In the 2019 paper, [`MultiFiT: Efficient Multi-lingual Language Model Fine-tuning`](https://arxiv.org/abs/1909.04761), the transfer learning language model is improved using  
+## Recent Improvements 
+In the paper [MultiFiT: Efficient Multi-lingual Language Model Fine-tuning](https://arxiv.org/abs/1909.04761) (2019), the transfer learning language model is improved using  
 1. `Subword Tokenization`, which uses a mixture of character, subword and word tokens, depending on how common they are. These properties allow it to fit much better to multilingual models (non-english languages).
     
 <p align="center">
-  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/multifit_vocabularies.png?raw=true" width="300">
+  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/multifit_vocabularies.png?raw=true" width="400">
 </p>
 
 2. Updates the `AWD-LSTM` base RNN network with a `Quasi-Recurrent Neural Network` (QRNN). The QRNN benefits from attributes from both a CNN and an LSTM:
@@ -38,7 +38,7 @@ In the 2019 paper, [`MultiFiT: Efficient Multi-lingual Language Model Fine-tunin
     `"In our experiments, we obtain a 2-3x speed-up during training using QRNNs"`
 
 <p align="center" >
-  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/multifit_qrnn.png?raw=true" width="500">
+  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/multifit_qrnn.png?raw=true" width="550">
 </p>
 
 > _"We find that our monolingual language models fine-tuned only on `100 labeled examples` of the corresponding task in the target language outperform zero-shot inference (trained on `1000 examples` in the source language) with multilingual BERT and LASER. MultiFit also outperforms the other methods when all models are fine-tuned on 1000 target language examples."_
