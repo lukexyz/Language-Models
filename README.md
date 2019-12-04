@@ -59,8 +59,8 @@ Prediction: 2  | Actual: 2
 
 ## Results
 Plotting an Actual vs. Predicted matrix gives us a visual representation of the accuracy of the model. True positives are highlighted on the diagonal. So even when it makes the prediction wrong - the error usually is only off by only 1 star. 
-<p>
-  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/actual_vs_predicted.png?raw=true" width="300">
+<p align="center">
+  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/actual_vs_predicted.png?raw=true" width="350">
 </p>
 <br/>
 
