@@ -1,5 +1,5 @@
-# ULMFiT NLP Transfer Learning
-[ULMFiT (2018)](https://arxiv.org/pdf/1801.06146.pdf) is a state-of-the-art method which provides a framework for NLP transfer learning. 
+# ULMFiT NLP Transfer Learning :book: :speech_balloon:
+[ULMFiT (2018)](https://arxiv.org/abs/1801.06146) is a state-of-the-art method which provides a framework for NLP transfer learning. 
 It works in three stages:  
 
 1. **General-Domain LM Pretraining**  
@@ -15,9 +15,30 @@ The embeddings learnt from these first two steps are imported into a new `classi
   <img src="https://github.com/lukexyz/Language-Models/blob/master/img/Artboard%201@1.5x.png?raw=true">
 </p>
 
+  → :notebook_with_decorative_cover: See [ULMFiT-Yelp.ipynb](notebooks/02-ULMFiT-Yelp-Full-Train.ipynb) for notebook 
+  
+  → :page_with_curl: See [arxiv.org/abs/1801.06146](https://arxiv.org/abs/1801.06146) for paper 
 
+<br/>
 
 ## Synthetic Text Generation
+After `stage 2` of the process is complete, the `AWD-LSTM` RNN language model how now be used for synthetic text generation. The original RNN model was trained to predict the next word in the `WikiText103` dataset, and we have fine-tuned this with our yelp corpus to predict the next word in a restaurant review.
+
+```python
+learn.predict("I really loved the restaurant, the food was")
+```
+> I really loved the restaurant, the food was `authentic`
+
+```python
+learn.predict("I hated the restaurant, the food tasted")
+```
+> I hated the restaurant, the food tasted `bad`
+
+You can generate reviews of any length, however beyond acceptable sentence structure, they tend to lack higher-order cohesion within a paragraph. Larger models such as OpenAI GPT-2 or BERT can do a better job at this, but still suffer from the same problems. 
+```python
+learn.predict("The food is good and the staff", words=430, temperature=0.75)
+```
+> The food is good and the staff is very friendly. We had the full menu and the Big Lots of Vegas. The food was ok, but there was nothing and this isn't a Chinese place.
 
 
 ## Classifier Results
