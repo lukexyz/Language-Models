@@ -23,7 +23,7 @@ The embeddings learnt from these first two steps are imported into a new `classi
 <br/>
 
 ## Synthetic Text Generation
-After stage 2 of the process is complete, the `AWD-LSTM` RNN language model how now be used for synthetic text generation. The original RNN model was trained to predict the next word in the `WikiText103` dataset, we have fine-tuned this with our yelp corpus to predict the next word in a restaurant review.
+After stage 2 of the process is complete, the `AWD-LSTM` RNN language model can now be used for synthetic text generation. The original RNN model was trained to predict the next word in the `WikiText103` dataset, and we have fine-tuned this with our yelp corpus to predict the next word in a restaurant review.
 
 ```python
 learn.predict("I really loved the restaurant, the food was")
