@@ -1,15 +1,15 @@
-# ULMFiT NLP Transfer Learning :book: :speech_balloon:
+# ULMFiT NLP Transfer Learning :earth_africa::book::speech_balloon:
 Sentiment analysis via prediction of restaurant reviews using `ULMFiT (2018)`, a state-of-the-art method which provides a framework for NLP transfer learning. (https://arxiv.org/abs/1801.06146)
 
 To build the text classification model, there are three stages:  
 
-1. **General-Domain LM Pretraining**  
+1. :earth_africa: **General-Domain LM Pretraining**  
 A pretrained `AWD-LSTM SequentialRNN` is imported, which works as a sequence generator (i.e. predicts the next word) for a general-domain corpus, in our case the `WikiText103` dataset.
 
-2. **Target Task LM Fine-Tuning**  
+2. :book: **Target Task LM Fine-Tuning**  
 The `AWD-LSTM Language Model` is fine-tuned on the domain-specific corpus (Yelp reviews), to be able to generate fake restaurant reviews.
 
-3. **Target Task Classifier**  
+3. :speech_balloon: **Target Task Classifier**  
 The embeddings learnt from these first two steps are imported into a new `classifier model`, which is then fine-tuned on the target task (star ratings) with gradual unfreezing of the final layers.
 
 <p align="center" >
