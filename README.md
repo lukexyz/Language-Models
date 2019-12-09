@@ -1,17 +1,16 @@
 # ULMFiT NLP Transfer Learning :book: :speech_balloon:
-`ULMFiT (2018)`, is a state-of-the-art method which provides a framework for NLP transfer learning.  
-https://arxiv.org/abs/1801.06146
+Sentiment analysis via prediction of restaurant reviews using `ULMFiT (2018)`, a state-of-the-art method which provides a framework for NLP transfer learning. (https://arxiv.org/abs/1801.06146)
 
-It works in three stages:  
+To build the text classification model, there are three stages:  
 
 1. **General-Domain LM Pretraining**  
-The `AWD-LSTM SequentialRNN` is pretrained on a general-domain corpus, in our case the `WikiText103` dataset.
+A pretrained `AWD-LSTM SequentialRNN` is imported, which works as a sequence generator (i.e. predicts the next word) for a general-domain corpus, in our case the `WikiText103` dataset.
 
 2. **Target Task LM Fine-Tuning**  
-The `AWD-LSTM Language Model`, training as a sequence generator, is fine-tuned on the domain-specific corpus (Yelp reviews).
+The `AWD-LSTM Language Model` is fine-tuned on the domain-specific corpus (Yelp reviews), to be able to generate fake restaurant reviews.
 
 3. **Target Task Classifier**  
-The embeddings learnt from these first two steps are imported into a new `classifier model`, which is fine-tuned on the target task (star ratings) with gradual unfreezing of the final layers.
+The embeddings learnt from these first two steps are imported into a new `classifier model`, which is then fine-tuned on the target task (star ratings) with gradual unfreezing of the final layers.
 
 <p align="center" >
   <img src="https://github.com/lukexyz/Language-Models/blob/master/img/Artboard%201@1.5x.png?raw=true">
