@@ -1,5 +1,5 @@
 # ULMFiT NLP Transfer Learning :earth_africa::book::speech_balloon:
-Sentiment analysis via prediction of restaurant reviews using `ULMFiT (2018)`, a state-of-the-art method which provides a framework for NLP transfer learning. (https://arxiv.org/abs/1801.06146)
+Sentiment analysis via prediction of restaurant reviews using `ULMFiT (2018)`, a state-of-the-art method (for 2018) which provides a framework for NLP transfer learning. (https://arxiv.org/abs/1801.06146)
 
 To build the text classification model, there are three stages:  
 
@@ -35,7 +35,7 @@ learn.predict("I hated the restaurant, the food tasted")
 ```
 > I hated the restaurant, the food tasted `bad`
 
-You can generate reviews of any length. The output generally has a believable sentence structure, but they tend to lack higher-order coherency within a paragraph. Larger models such as OpenAI GPT-2 or BERT can do a better job at this, but still suffer from the same problems. 
+You can generate reviews of any length. The output generally has a believable sentence structure, but they tend to lack higher-order coherency within a paragraph. This is because the RNN has no memory of the start of the sentence by the time it reaches the end of it. Larger `transformer` attention models like OpenAI GPT-2 or BERT do a better job at this.
 ```python
 learn.predict("The food is good and the staff", words=30, temperature=0.75)
 ```
