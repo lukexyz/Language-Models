@@ -1,15 +1,16 @@
-# ULMFiT NLP Transfer Learning :book: :speech_balloon:
-[ULMFiT (2018)](https://arxiv.org/abs/1801.06146) is a state-of-the-art method which provides a framework for NLP transfer learning. 
-It works in three stages:  
+# ULMFiT NLP Transfer Learning :earth_africa::book::speech_balloon:
+Sentiment analysis via prediction of restaurant reviews using `ULMFiT (2018)`, a state-of-the-art method (for 2018) which provides a framework for NLP transfer learning. (https://arxiv.org/abs/1801.06146)
 
-1. **General-Domain LM Pretraining**  
-The `AWD-LSTM SequentialRNN` is pretrained on a general-domain corpus, in our case the `WikiText103` dataset.
+To build the text classification model, there are three stages:  
 
-2. **Target Task LM Fine-Tuning**  
-The `AWD-LSTM Language Model`, training as a sequence generator, is fine-tuned on the domain-specific corpus (Yelp reviews).
+1. :earth_africa: **General-Domain LM Pretraining**  
+A pretrained `AWD-LSTM SequentialRNN` is imported, which works as a sequence generator (i.e. predicts the next word) for a general-domain corpus, in our case the `WikiText103` dataset.
 
-3. **Target Task Classifier**  
-The embeddings learnt from these first two steps are imported into a new `classifier model`, which is fine-tuned on the target task (star ratings) with gradual unfreezing of the final layers.
+2. :book: **Target Task LM Fine-Tuning**  
+The `AWD-LSTM Language Model` is fine-tuned on the domain-specific corpus (Yelp reviews), to be able to generate fake restaurant reviews.
+
+3. :speech_balloon: **Target Task Classifier**  
+The embeddings learnt from these first two steps are imported into a new `classifier model`, which is then fine-tuned on the target task (star ratings) with gradual unfreezing of the final layers.
 
 <p align="center" >
   <img src="https://github.com/lukexyz/Language-Models/blob/master/img/Artboard%201@1.5x.png?raw=true">
@@ -22,7 +23,7 @@ The embeddings learnt from these first two steps are imported into a new `classi
 <br/>
 
 ## Synthetic Text Generation
-After `stage 2` of the process is complete, the `AWD-LSTM` RNN language model how now be used for synthetic text generation. The original RNN model was trained to predict the next word in the `WikiText103` dataset, and we have fine-tuned this with our yelp corpus to predict the next word in a restaurant review.
+After stage 2 of the process is complete, the `AWD-LSTM` RNN language model can now be used for synthetic text generation. The original RNN model was trained to predict the next word in the `WikiText103` dataset, and we have fine-tuned this with our yelp corpus to predict the next word in a restaurant review.
 
 ```python
 learn.predict("I really loved the restaurant, the food was")
@@ -34,9 +35,9 @@ learn.predict("I hated the restaurant, the food tasted")
 ```
 > I hated the restaurant, the food tasted `bad`
 
-You can generate reviews of any length, however beyond acceptable sentence structure, they tend to lack higher-order cohesion within a paragraph. Larger models such as OpenAI GPT-2 or BERT can do a better job at this, but still suffer from the same problems. 
+You can generate reviews of any length. The output generally has a believable sentence structure, but they tend to lack higher-order coherency within a paragraph. This is because the RNN has no memory of the start of the sentence by the time it reaches the end of it. Larger `transformer` attention models like OpenAI GPT-2 or BERT do a better job at this.
 ```python
-learn.predict("The food is good and the staff", words=430, temperature=0.75)
+learn.predict("The food is good and the staff", words=30, temperature=0.75)
 ```
 > The food is good and the staff is very friendly. We had the full menu and the Big Lots of Vegas. The food was ok, but there was nothing and this isn't a Chinese place.
 
@@ -44,7 +45,7 @@ learn.predict("The food is good and the staff", words=430, temperature=0.75)
 ## Classifier: Predicting the Star-value of a Review ★★★★★
 The overall accuracy of the trained classifier was `0.665`, which means that giving the model and un-seen restaurant review it can predict its rating (1-5 stars) correctly `66.5%` of the time.
 
-_Examples:_  
+_Examples_  
 
 Prediction: 5  | Actual: 5  
 `(INPUT 25816) You can count on excellent quality and fresh baked goods daily. The patisseries are refined and always delicious. I am addicted to their home made salads and strong coffee. \nYou can order customized cakes and impress your guests. Everything here is made with the finest ingredients. It never disappoints. \n\nThe service is formal. You are always treated with respect. Sometimes I don't mind when they call me Madame but I always correct them and ask to be called \"Mademoiselle, SVP!\"\n\nI guarantee you will return here many times.`  
@@ -55,9 +56,15 @@ Prediction: 4  | Actual: 3
 Prediction: 2  | Actual: 2  
 `(INPUT 43756) The food was not all that.  The customer service was just okay. Don't get what all the rave is about??`
 
+## Results
+Plotting an Actual vs. Predicted matrix gives us a visual representation of the accuracy of the model. True positives are highlighted on the diagonal. So even when it makes the prediction wrong - the error usually is only off by only 1 star. 
+<p align="center">
+  <img src="https://github.com/lukexyz/Language-Models/blob/master/img/actual_vs_predicted.png?raw=true" width="350">
+</p>
 <br/>
 
-## Recent Improvements 
+
+## Improvements 
 In the paper [MultiFiT: Efficient Multi-lingual Language Model Fine-tuning](https://arxiv.org/abs/1909.04761) (2019), the transfer learning language model is improved using  
 1. `Subword Tokenization`, which uses a mixture of character, subword and word tokens, depending on how common they are. These properties allow it to fit much better to multilingual models (non-english languages).
     
@@ -77,7 +84,7 @@ In the paper [MultiFiT: Efficient Multi-lingual Language Model Fine-tuning](http
 
 > _"We find that our monolingual language models fine-tuned only on `100 labeled examples` of the corresponding task in the target language outperform zero-shot inference (trained on `1000 examples` in the source language) with multilingual BERT and LASER. MultiFit also outperforms the other methods when all models are fine-tuned on 1000 target language examples."_
 
-Reference: `Efficient multi-lingual language model fine-tuning` 10 Sep 2019 by Sebastian Ruder and Julian Eisenschlos (http://nlp.fast.ai/classification/2019/09/10/multifit.html) 
+Reference: `Efficient multi-lingual language model fine-tuning` by Sebastian Ruder and Julian Eisenschlos (http://nlp.fast.ai/classification/2019/09/10/multifit.html) 
 
 
 
@@ -106,5 +113,7 @@ Reference: `Efficient multi-lingual language model fine-tuning` 10 Sep 2019 by S
     $ jupyter notebook --ip=0.0.0.0 --no-browser
     # http://<public IP>:8888/?token=<token>
 
-### References
-https://humboldt-wi.github.io/blog/research/information_systems_1819/group4_ulmfit
+##### Acknowledgements
+* [A Code-First Introduction to NLP](https://github.com/fastai/course-nlp)
+* [Universal Language Model Fine-Tuning (ULMFiT)](https://humboldt-wi.github.io/blog/research/information_systems_1819/group4_ulmfit)  
+* [NLP & fastai | MultiFiT](https://mc.ai/nlp-fastai-multifit/)
